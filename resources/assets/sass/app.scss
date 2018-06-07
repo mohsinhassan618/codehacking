@@ -1,2 +1,8 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+body#admin-page {
+  padding-top: 0px;
+}
+ul.dropdown-menu.dropdown-user {
+  height: auto;
+}
