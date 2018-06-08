@@ -11,6 +11,10 @@ class Role extends Model
       'name'
     ];
 
+    public function getNameAttribute ($value){
+        return ucfirst($value);
+    }
+
 
 
 }
