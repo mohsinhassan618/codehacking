@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use App\Post;
 
 class User extends Authenticatable
 {
@@ -25,8 +26,23 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function isAdmin(){
+        if($this->role->name == 'Administrator' && $this->is_active == 1 ){
+            return true;
+        }
+        return false;
+    }
     public function role() {
         return $this->belongsTo('App\Role');
 
+    }
+
+    public function photo(){
+        return $this->belongsTo('App\Photo');
+    }
+
+
+    public function posts(){
+        return $this->hasMany('App\Post');
     }
 }

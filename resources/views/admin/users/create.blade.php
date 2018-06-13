@@ -28,8 +28,8 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('file','Photo') !!}
-        {!! Form::file('file') !!}
+        {!! Form::label('photo_id','Photo') !!}
+        {!! Form::file('photo_id') !!}
     </div>
 
     <div class="form-group">
@@ -37,7 +37,7 @@
         {!! Form::password('password',['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::submit('Create Post',['class' => 'btn btn-primary']) !!}
+        {!! Form::submit('Create User',['class' => 'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}

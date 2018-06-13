@@ -1,10 +1,68 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.admin')
 
-</body>
-</html>
+
+@section('content')
+    <h1>Edit Users</h1>
+
+    <div class="row">
+
+
+        <div class="col-sm-3">
+
+            <img src="{{ $user->photo ? $user->photo->file : 'http://placehold.it/400x400' }}"
+                 class="img img-responsive img-rounded">
+        </div>
+
+        <div class="col-sm-9">
+
+
+            {!! Form::model($user,['method' => 'patch', 'action' => ['AdminUsersController@update', $user->id ], 'files'=> true ]) !!}
+            <div class="form-group">
+                {!! Form::label('name','Name:') !!}
+                {!! Form::text('name',null,['class' => 'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('email','Email:') !!}
+                {!! Form::email('email',null,['class' => 'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('role_id','Role') !!}
+                {!! Form::select('role_id',$roles,Null,['class' => 'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('is_active','Status') !!}
+                {!! Form::select('is_active',[ 1 => 'Active' , 0 => 'Not Active'],Null,['class' => 'form-control']) !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('photo_id','Photo') !!}
+                {!! Form::file('photo_id') !!}
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('password','Password') !!}
+                {!! Form::password('password',['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::submit('Update User',['class' => 'btn btn-primary col-sm-6']) !!}
+            </div>
+
+            {!! Form::close() !!}
+
+
+            {!! Form::open(['method' => 'DELETE', 'action' => ['AdminUsersController@destroy',$user->id] ]) !!}
+             <div class="form-group">
+                {!! Form::submit('Delete User',['class' => 'btn btn-danger col-sm-6']) !!}
+             </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+    @include('includes.form-errors')
+
+@endsection
+
+
