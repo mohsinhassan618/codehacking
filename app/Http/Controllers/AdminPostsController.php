@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Photo;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -89,6 +90,11 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::findOrFail($id);
+
+        $categories = Category::pluck('name','id')->all();
+        $categories = ['' => 'Chose Categories'] + $categories  ;
+        return view('admin.posts.edit',compact('post','categories'));
     }
 
     /**
@@ -98,9 +104,30 @@ class AdminPostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostsCreateRequest $request, $id)
     {
         //
+
+        $user = Auth::User();
+        $post = Post::findOrFail($id);
+        $input = $request->all();
+
+        if($file = $request->file('photo_id')){
+
+            //Delete previous photo
+            if(isset($post->photo->file) && file_exists( public_path() . $post->photo->file )){
+                unlink(public_path() . $post->photo->file);
+            }
+
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo = Photo::create(['file' => $name]);
+            $input['photo_id'] = $photo->id;
+        }
+
+        $user->posts()->whereId($id)->first()->update($input);
+
+        return  redirect('/admin/posts/');
     }
 
     /**
@@ -112,5 +139,14 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
+
+        $post = Post::FindOrFail($id);
+        if(isset($post->photo->file) &&  file_exists( public_path() . $post->photo->file )){
+            unlink(public_path() . $post->photo->file);
+        }
+        $post->delete();
+
+        Session::flash('msg',"Delete Successfully");
+        return redirect('admin/posts');
     }
 }
