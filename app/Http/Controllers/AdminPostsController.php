@@ -91,7 +91,6 @@ class AdminPostsController extends Controller
     {
         //
         $post = Post::findOrFail($id);
-
         $categories = Category::pluck('name','id')->all();
         $categories = ['' => 'Chose Categories'] + $categories  ;
         return view('admin.posts.edit',compact('post','categories'));
@@ -112,7 +111,7 @@ class AdminPostsController extends Controller
         $post = Post::findOrFail($id);
         $input = $request->all();
 
-        if($file = $request->file('photo_id')){
+        if($file = $request->file('photo_id')) {
 
             //Delete previous photo
             if(isset($post->photo->file) && file_exists( public_path() . $post->photo->file )){
@@ -126,7 +125,6 @@ class AdminPostsController extends Controller
         }
 
         $user->posts()->whereId($id)->first()->update($input);
-
         return  redirect('/admin/posts/');
     }
 
@@ -139,14 +137,20 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
-
         $post = Post::FindOrFail($id);
         if(isset($post->photo->file) &&  file_exists( public_path() . $post->photo->file )){
             unlink(public_path() . $post->photo->file);
         }
-        $post->delete();
 
+        $post->delete();
         Session::flash('msg',"Delete Successfully");
         return redirect('admin/posts');
+    }
+
+    public function post($id){
+
+       $post = Post::findOrFail($id);
+       $comments = $post->comments()->whereIsActive(1)->get();
+       return view('post',compact('post','comments'));
     }
 }

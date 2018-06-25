@@ -21,8 +21,24 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware'=> 'admin'],function(){
 
+    Route::get('post/{id}',[ 'as' => 'home.post' ,'uses' => 'AdminPostsController@post'] );
     Route::resource('admin/users','AdminUsersController');
     Route::resource('admin/posts','AdminPostsController');
+    Route::resource('admin/categories','AdminCategoriesController');
+    Route::get('admin/media',[ 'as' => 'admin.media.index', 'uses' => 'AdminMediasController@index']);
+    Route::get('admin/media/upload',[ 'as' => 'admin.media.upload', 'uses' =>'AdminMediasController@upload']);
+    Route::post('admin/media',  'AdminMediasController@store');
+    Route::delete('/admin/media/{id}',  'AdminMediasController@destroy');
+
+    Route::resource('admin/comments','PostCommentsController');
+    Route::resource('admin/comment/replies','CommentRepliesController');
+
+
+});
+
+
+Route::group(['middleware'=> 'auth'],function(){
+    Route::post('comment/reply','CommentRepliesController@createReply');
 });
 
 
