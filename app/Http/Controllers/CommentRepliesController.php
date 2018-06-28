@@ -116,7 +116,6 @@ class CommentRepliesController extends Controller
             ];
 
             CommentReply::create($data);
-
             $request->session()->flash('comment_msg',"Your comment has been submitted and waiting for approval");
             //  return $data;
             return redirect()->back();

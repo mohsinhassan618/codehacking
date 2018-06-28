@@ -14,7 +14,4 @@ class Role extends Model
     public function getNameAttribute ($value){
         return ucfirst($value);
     }
-
-
-
 }

@@ -28,7 +28,7 @@
           @foreach($users as $user)
             <tr>
                 <td> {{$user->id }}</td>
-                <td><a href="{{ route('admin.users.edit',$user->id) }}"> {{ $user->name }} </a> </td>
+                <td><a href="{{ route('users.edit',$user->id) }}"> {{ $user->name }} </a> </td>
                 <td>{!!   $user->photo ? "<img height='50px' src='" . $user->photo->file . "' alt='' > " : "No Photo" !!}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ !empty($user->role) ? $user->role->name : "No Role" }}</td>

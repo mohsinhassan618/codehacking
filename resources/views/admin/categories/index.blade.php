@@ -40,7 +40,7 @@
                 @foreach($categories as $category)
                     <tr>
                         <td>{{ $category->id  }}</td>
-                        <td><a href="{{ route('admin.categories.edit',$category->id) }}"> {{ $category->name  }} </a> </td>
+                        <td><a href="{{ route('categories.edit',$category->id) }}"> {{ $category->name  }} </a> </td>
                         <td>{{ $category->created_at instanceof Carbon\Carbon ? $category->created_at->diffForhumans() : $category->created_at }}</td>
                     </tr>
                 @endforeach

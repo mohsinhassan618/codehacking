@@ -67,7 +67,7 @@
 
             <div class="media">
                 <a class="pull-left" href="#">
-                    <img height="64px" class="media-object" src="{{ isset($comment->user->photo->file) ? $comment->user->photo->file : 'http://placehold.it/64x64'  }}" alt="">
+                    <img height="64px" class="media-object" src="{{ isset($comment->user->gravatar) ? $comment->user->gravatar : 'http://placehold.it/64x64'  }}" alt="">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading"> {{ $comment->author }}
@@ -86,7 +86,7 @@
                                 <div class=" media">
                                     <a class="pull-left" href="#">
                                         <img height="64px" class="media-object"
-                                             src="{{ isset($reply->user->photo->file) ? $reply->user->photo->file : 'http://placehold.it/64x64'  }}"
+                                             src="{{ isset($comment->user->gravatar) ? $comment->user->gravatar : 'http://placehold.it/64x64'  }}"
                                              alt="">
                                     </a>
                                     <div class="media-body">

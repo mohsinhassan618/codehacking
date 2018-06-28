@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 use App\Post;
+use function md5;
+use function strtolower;
 
 class User extends Authenticatable
 {
@@ -44,5 +46,13 @@ class User extends Authenticatable
 
     public function posts(){
         return $this->hasMany('App\Post');
+    }
+
+    public function getGravatarAttribute(){
+
+        $hash = md5(strtolower($this->attributes['email'] ));
+
+        return "https://www.gravatar.com/avatar/$hash?d=mp";
+
     }
 }
