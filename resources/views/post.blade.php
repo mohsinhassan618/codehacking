@@ -27,7 +27,7 @@
     <hr>
 
     <!-- Post Content -->
-    <p> {{ $post->body }}</p>
+    <p> {!!   $post->body !!}</p>
     <hr>
     @if(Session::has('comment_msg'))
         {{ Session('comment_msg') }}
@@ -73,7 +73,7 @@
                     <h4 class="media-heading"> {{ $comment->author }}
                         <small>{{ $comment->created_at instanceof \Carbon\Carbon ? $comment->created_at->diffForHumans(): $comment->created_at}}</small>
                     </h4>
-                   {{ isset($comment->body) ? $comment->body : null }}
+                   {{   isset($comment->body) ? $comment->body : null }}
 
 
                     <div class="nested-comment comment-reply-container">

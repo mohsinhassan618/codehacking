@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-
+@include('includes.tinyeditor')
 
 @section('content')
 
@@ -55,7 +55,6 @@
 
         </div>
     </div>
-
 
     @include('includes.form-errors')
 

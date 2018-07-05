@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 
@@ -36,14 +38,18 @@ Route::group(['middleware'=> 'admin'],function(){
 
 });
 
+
+
 Route::get('/home', 'HomeController@index');
 
 //Route::group(['middleware'=> 'auth'],function(){
 //    Route::post('comment/reply','CommentRepliesController@createReply');
 //});
 
-
-
 Route::get('/admin',function (){
     return view('admin.index');
 });
+
+//Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+//    \UniSharp\LaravelFilemanager\Lfm::routes();
+//});
