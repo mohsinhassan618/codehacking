@@ -1,16 +1,1 @@
-body#admin-page {
-  padding-top: 0px; }
-
-ul.dropdown-menu.dropdown-user {
-  height: auto; }
-
-.nested-comment {
-  margin-top: 50px !important; }
-
-button#reply-button {
-  margin: 10px 0px; }
-
-.reply-form {
-  display: none; }
-
-/*# sourceMappingURL=app.css.map */
+body#admin-page{padding-top:0}ul.dropdown-menu.dropdown-user{height:auto}.nested-comment{margin-top:50px!important}button#reply-button{margin:10px 0}.reply-form{display:none}

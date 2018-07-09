@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Photo;
+use function dd;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use function print_r;
+use function redirect;
+use function session;
 
 class AdminMediasController extends Controller
 {
@@ -110,5 +114,30 @@ class AdminMediasController extends Controller
     public function upload(){
 
         return view('admin.media.create');
+    }
+
+
+    public function deleteMedia(Request $request){
+
+        if( empty($request->input('action-to-perform') ) || empty($request->input('checkBoxArray')) ){
+            session()->flash('msg','NO Action Performed');
+            return redirect()->back();
+        }
+
+        $data = $request->input('checkBoxArray');
+
+
+        foreach ($data as $id){
+            $photo = Photo::findOrFail($id);
+            if( isset($photo->file) && file_exists(public_path(). $photo->file)){
+                unlink(public_path(). $photo->file);
+            }
+            $photo->delete();
+        }
+
+        session()->flash('msg','Records Deleted Successfully');
+
+        return redirect()->back();
+
     }
 }

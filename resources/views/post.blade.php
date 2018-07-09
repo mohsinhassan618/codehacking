@@ -22,7 +22,7 @@
     <hr>
 
     <!-- Preview Image -->
-    <img class="img-responsive" src="{{ $post->photo->file }}" alt="">
+    <img class="img-responsive" src="{{ isset($post->photo->file) ? $post->photo->file : "www.placeholder.com/700x700" }}" alt="">
 
     <hr>
 
